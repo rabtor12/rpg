@@ -11,30 +11,28 @@ public class RayShooter : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
     private void OnGUI()
     {
-        int size = 12;
-        GUI.Label(new Rect(_camera.pixelWidth / 2 - size / 4, _camera.pixelHeight / 2 - size / 2, size, size),"*");
+        var size = 12;
+        GUI.Label(new Rect(_camera.pixelWidth / 2 - size / 4, _camera.pixelHeight / 2 - size / 2, size, size), "*");
     }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            var point = new Vector3(_camera.pixelWidth/2, _camera.pixelHeight/2, 0);
+            var point = new Vector3(_camera.pixelWidth / 2, _camera.pixelHeight / 2, 0);
             var ray = _camera.ScreenPointToRay(point);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                GameObject hitObject = hit.transform.gameObject;
-                ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
+                var hitObject = hit.transform.gameObject;
+                var target = hitObject.GetComponent<ReactiveTarget>();
                 if (target != null)
-                {
                     target.ReactToHit();
-                }
                 else
-                {
                     StartCoroutine(SphereIndicator(hit.point));
-                }
             }
         }
     }
