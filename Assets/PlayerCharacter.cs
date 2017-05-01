@@ -1,16 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour {
-
-	// Use this for initialization
+    private int healf;
+	
 	void Start () {
-		
+        healf = 5;
 	}
 	
-	// Update is called once per frame
+	
 	void Update () {
 		
 	}
+    public void Hurt (int damage)
+    {
+        healf -= damage;
+        Debug.Log("Healf:" + healf);
+    }
 }
